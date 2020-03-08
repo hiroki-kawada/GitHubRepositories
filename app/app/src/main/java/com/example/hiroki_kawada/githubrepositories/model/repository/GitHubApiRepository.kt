@@ -9,7 +9,7 @@ import retrofit2.await
 import java.net.SocketTimeoutException
 
 interface IGitHubApiRepository {
-    suspend fun getGitHubList(): Response<List<GitHubRepositoriesResponse>>
+    suspend fun getGitHubRepositoryList(): Response<List<GitHubRepositoriesResponse>>
     suspend fun getReadme(name: String): Response<GithubReadme>
 }
 
@@ -19,7 +19,7 @@ interface IGitHubApiRepository {
 class GitHubApiRepository(
     private val gitHubApiService: GitHubApiService
 ) : IGitHubApiRepository {
-    override suspend fun getGitHubList(): Response<List<GitHubRepositoriesResponse>> {
+    override suspend fun getGitHubRepositoryList(): Response<List<GitHubRepositoriesResponse>> {
         return try {
             val response = gitHubApiService.getGitHubRepositories("andfactory").await()
             Response.Success(response)

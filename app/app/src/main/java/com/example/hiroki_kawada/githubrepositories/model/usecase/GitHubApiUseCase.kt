@@ -14,9 +14,9 @@ import kotlinx.coroutines.withContext
 class GitHubApiUseCase(
     private val iGitHubRepository: IGitHubApiRepository
 ) {
-    suspend fun getGitHubList(): UseCaseResult<MutableList<RepositoryListItemData>, String> =
+    suspend fun getGitHubRepositoryList(): UseCaseResult<MutableList<RepositoryListItemData>, String> =
         withContext(Dispatchers.IO) {
-            return@withContext when (val response = iGitHubRepository.getGitHubList()) {
+            return@withContext when (val response = iGitHubRepository.getGitHubRepositoryList()) {
                 is Response.Success -> {
                     val list: MutableList<RepositoryListItemData> = mutableListOf()
                     response.value.forEach {
@@ -36,7 +36,7 @@ class GitHubApiUseCase(
         }
 
 
-    suspend fun getGiHubList(string: String): UseCaseResult<String, String> =
+    suspend fun getReadme(string: String): UseCaseResult<String, String> =
         withContext(Dispatchers.IO) {
             return@withContext when (val response = iGitHubRepository.getReadme(string)) {
                 is Response.Success -> {

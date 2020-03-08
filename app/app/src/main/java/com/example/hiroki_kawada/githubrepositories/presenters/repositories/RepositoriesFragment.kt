@@ -74,7 +74,7 @@ class RepositoriesFragment : Fragment(), ClickListener {
                 }
             }
         })
-        repositoriesViewModel.tapGetListButton()
+        repositoriesViewModel.getGitHubRepositoryList()
     }
 
     override fun itemClickListener(item: String) {

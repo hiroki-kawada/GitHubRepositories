@@ -24,9 +24,9 @@ class RepositoriesViewModel(
 
     var htmlUrl: String = ""
 
-    fun tapGetListButton() {
+    fun getGitHubRepositoryList() {
         viewModelScope.launch {
-            when (val useCaseResult = gitHubApiUseCase.getGitHubList()) {
+            when (val useCaseResult = gitHubApiUseCase.getGitHubRepositoryList()) {
                 is UseCaseResult.Success -> {
                     val repositoryTitleList: MutableList<String> = mutableListOf()
                     useCaseResult.value.forEach {
@@ -43,7 +43,7 @@ class RepositoriesViewModel(
 
     fun tapListItem(title: String) {
         viewModelScope.launch {
-            when (val useCaseResult = gitHubApiUseCase.getGiHubList(title)) {
+            when (val useCaseResult = gitHubApiUseCase.getReadme(title)) {
                 is UseCaseResult.Success -> {
                     htmlUrl = useCaseResult.value
                     _oneTimeEvent.postValue(OneTimeEvent.ShowReadMeDialog)
